@@ -15,11 +15,15 @@ import { Button } from 'protractor';
   entryComponents: [ButtonComponent]
 })
 export class AppModule {
-  constructor(injector: Injector) {
-    const btn = createCustomElement(ButtonComponent, { injector })
-    customElements.define('angular-app', btn)
+  constructor(private injector: Injector) {
   }
-  ngDoBootStrap() {
 
-  };
+  ngDoBootstrap(): void {
+    const { injector } = this;
+    // create custom elements from angular components
+    const btn = createCustomElement(ButtonComponent, { injector });
+    // define in browser registry
+    customElements.define('angular-app', btn);
+  }
+
 }
